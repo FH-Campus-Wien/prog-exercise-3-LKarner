@@ -91,9 +91,8 @@ public class App {
     }
 
 
+
     public static void oneMonthCalender(int tage_max, int start) {
-
-
 
         int arrayDays[] = new int[tage_max];
         int oneWeek = 7 - start + 1;
@@ -105,19 +104,44 @@ public class App {
             System.out.print("   "); //Rückt die Zahlen am Anfang abhängig vom Starttag ein.
         }
         //oneWeek = oneWeek - start + 1;
-        for (int count = 1; count < arrayDays.length; count++) { //Start = 1, da Monat mit 1 beginnt.
+        for (int count = 1; count <= arrayDays.length; count++) { //Start = 1, da Monat mit 1 beginnt.
             String tag = String.format("%2d" + arrayDays[count - 1]);
             System.out.print(tag + " ");
             oneWeek--;
             if (count == arrayDays.length || oneWeek == 0) {
 
-                System.out.println();
                 oneWeek = 7;
+                System.out.println();
+
             }
 
         }
     }
 
+public static long[] lcg (long input) {
+
+        long arrayData [] = new long[10]; //lt. Angabe für 10 Zufallszahlen
+
+    //Konstanten:
+    long M = (long)Math.pow(2, 31); //(long), da sonst double; 2 = basis, 31 = exponent
+    long A = 1103515245L;
+    int C = 12345;
+
+    /* Berechnungsvorschrift:
+    Xi+1=(aXi +c)mod m
+
+    m...Modul
+    c...Inkrement
+    a...Faktor
+    */
+
+    arrayData[0] = (C + A * input) % M; //für die erste Stelle im Array
+
+    for (int count = 1; count < 10; count++) { //Loop ab der 2. Stelle im Array
+        arrayData[count] = (A * arrayData[count - 1] + C) % M; //array[count-1], da Berechnung mit Xi und nicht Xi+1 lt. Formel
+    }
+    return arrayData;
+    }
 
 
 
@@ -156,7 +180,7 @@ public class App {
 
 
 
-        //oneMonthCalender(31,3);
+            //oneMonthCalender(30,2);
 
             //App.guessingGame(randomNumberBetweenOneAndHundred());
 
